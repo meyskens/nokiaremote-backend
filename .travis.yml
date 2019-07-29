@@ -1,0 +1,25 @@
+language: go
+dist: xenial
+go:
+  - '1.12.x'
+
+env:
+  - GO111MODULE=om
+
+stages:
+  - name: test
+  - name: release
+    if: tag IS present
+
+go_import_path: github.com/src-d/k8s-pod-headless-service-operator
+
+jobs:
+  include:
+    - name: 'Unit tests'
+      stage: test
+      script: make test
+    - name: 'Push image to Docker Hub'
+      stage: release
+      script:
+        - PKG_OS=linux make packages
+        - DOCKER_PUSH_LATEST=true make docker-push
