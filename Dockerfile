@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM ubuntu
 
 COPY ./build/bin/nokiaremote /bin/nokiaremote
 
