@@ -28,7 +28,7 @@ jobs:
       script:
         - PKG_OS=linux make packages
         - make docker-build
-        - docker tag maartje/nokiaremote:$TRAVIS_TAG registry.dispatch.sh/maartje/nokiaremote
+        - docker tag maartje/nokiaremote:$TRAVIS_TAG registry.dispatch.sh/maartje/nokiaremote:$TRAVIS_TAG
         - echo $DISPATCH_PASSWORD | docker login -u registry --password-stdin registry.dispatch.sh
-        - docker push registry.dispatch.sh/maartje/nokiaremote
+        - docker push registry.dispatch.sh/maartje/nokiaremote:$TRAVIS_TAG
 
