@@ -23,3 +23,12 @@ jobs:
       script:
         - PKG_OS=linux make packages
         - DOCKER_PUSH_LATEST=true make docker-push
+    - name: 'Push image to Dispatch'
+      stage: release
+      script:
+        - PKG_OS=linux make packages
+        - make docker-build
+        - docker tag maartje/nokiaremote dispatch.sh/maartje/nokiaremote
+        - echo $DISPATCH_PASSWORD | docker login -u registry --password-stdin registry.dispatch.sh
+        - docker push dispatch.sh/maartje/nokiaremote
+
