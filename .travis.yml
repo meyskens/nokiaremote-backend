@@ -11,7 +11,7 @@ stages:
   - name: release
     if: tag IS present
 
-go_import_path: github.com/src-d/k8s-pod-headless-service-operator
+go_import_path: github.com/meyskens/nokiaremote-backend
 
 jobs:
   include:
