@@ -57,7 +57,7 @@ func (s *ServeCommand) serveAction(c echo.Context) error {
 	s.broadcast <- action
 
 	if c.QueryParams().Get("wap") == "1" {
-		return c.Redirect(http.StatusTemporaryRedirect, "wap.wml")
+		return s.serveWML(c)
 	}
 
 	return c.String(http.StatusOK, "OK")
