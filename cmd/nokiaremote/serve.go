@@ -37,6 +37,7 @@ func (s *ServeCommand) ExecuteContext(ctx context.Context, args []string) error 
 	e := echo.New()
 	e.GET("/action", s.serveAction)
 	e.Any("/socket", s.serveSocket)
+	e.File("/wap.wml", "./wap.wml")
 
 	go s.runBroadcaster()
 
@@ -54,6 +55,11 @@ func (s *ServeCommand) serveAction(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "no action defined")
 	}
 	s.broadcast <- action
+
+	if c.QueryParams().Get("wap") == "1" {
+		return c.Redirect(http.StatusTemporaryRedirect, "wap.wml")
+	}
+
 	return c.String(http.StatusOK, "OK")
 }
 
