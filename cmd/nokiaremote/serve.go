@@ -37,7 +37,7 @@ func (s *ServeCommand) ExecuteContext(ctx context.Context, args []string) error 
 	e := echo.New()
 	e.GET("/action", s.serveAction)
 	e.Any("/socket", s.serveSocket)
-	e.File("/wap.wml", "./wap.wml")
+	e.GET("/wap.wml", s.serveWML)
 
 	go s.runBroadcaster()
 
@@ -81,6 +81,11 @@ func (s *ServeCommand) serveSocket(c echo.Context) error {
 	}
 
 	return nil
+}
+
+func (s *ServeCommand) serveWML(c echo.Context) error {
+	c.Response().Header().Set("Content-Type", "text/vnd.wap.wml")
+	return c.File("./wap.wml")
 }
 
 func (s *ServeCommand) runBroadcaster() {
