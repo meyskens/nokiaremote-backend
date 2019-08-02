@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">
+
+<wml>
+<card id="card1" title="NokiaRemote">
+<p>
+<a href="action?wap=1&amp;action=next&amp;count={{.Count}}">Next slide</a>
+</p>
+
+<p>
+<a href="action?wap=1&amp;action=previous&amp;count={{.Count}}">Previous slide</a>
+</p>
+
+<p>
+<a href="action?wap=1&amp;action=start&amp;count={{.Count}}">Start presentation</a>
+</p>
+
+<p>
+<a href="action?wap=1&amp;action=stop&amp;count={{.Count}}">Stop presentation</a>
+</p>
+
+</card>
+</wml>

@@ -3,10 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+	"text/template"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
