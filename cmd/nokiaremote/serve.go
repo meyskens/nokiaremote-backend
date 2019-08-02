@@ -3,8 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo"
@@ -84,8 +86,14 @@ func (s *ServeCommand) serveSocket(c echo.Context) error {
 }
 
 func (s *ServeCommand) serveWML(c echo.Context) error {
+	tmpl := template.Must(template.ParseFiles("./wap.wml"))
+
 	c.Response().Header().Set("Content-Type", "text/vnd.wap.wml")
-	return c.File("./wap.wml")
+	countStr := c.QueryParam("count")
+	count, _ := strconv.ParseInt(countStr, 10, 64)
+	count++
+
+	return tmpl.Execute(c.Response().Writer, struct{ Count int64 }{Count: count})
 }
 
 func (s *ServeCommand) runBroadcaster() {
